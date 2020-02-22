@@ -1,33 +1,34 @@
 package com.pg2d.tutorialclicker;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.pg2d.screens.SplashScreen;
 
-public class TutorialClicker extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
-	
+public class TutorialClicker extends Game {
+	public static final String GAME_NAME = "Tutorial Clicker";
+
+	public static final int WIDTH = 480;
+	public static final int HEIGHT = 700;
+
+	private boolean paused;
+
+
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		this.setScreen(new SplashScreen(this));
 	}
 
-	@Override
-	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+	// ** getters and setters ** \\
+
+	public boolean isPaused() {
+		return paused;
 	}
-	
-	@Override
-	public void dispose () {
-		batch.dispose();
-		img.dispose();
+
+	public void setPaused(boolean paused) {
+		this.paused = paused;
 	}
 }
